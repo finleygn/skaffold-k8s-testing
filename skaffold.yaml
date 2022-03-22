@@ -1,0 +1,19 @@
+apiVersion: skaffold/v2beta27
+kind: Config
+metadata:
+  name: k-s
+build:
+  artifacts:
+  - image: finleygn/gateway
+    context: ./apps/gateway
+    docker:
+      dockerfile: ./docker/gateway.Dockerfile
+  - image: finleygn/backend
+    context: ./apps/backend
+    docker:
+      dockerfile: ./docker/backend.Dockerfile
+deploy:
+  kubectl:
+    manifests:
+    - k8s/deployments.yml
+    - k8s/services.yml
